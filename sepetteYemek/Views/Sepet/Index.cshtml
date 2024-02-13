@@ -1,0 +1,28 @@
+﻿@using sepetteYemek.Models.siniflar
+@model List<Sepet>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CariLayout.cshtml";
+}
+
+<table id="search-table" class="table table-bordered">
+    <tr>
+        <th>Sepet ID</th>
+        <th>Cari Ad Soyad</th>
+        <th>Urun ID</th>
+        <th>Miktar</th>
+        <th>Toplam Fiyat</th>
+       
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>#</td>
+            <td>@k.Cari.CariAd @k.Cari.CariSoyad</td>
+            <td>@k.Urun.UrunAd</td>
+            <td>@k.Miktar</td>
+            <td>@k.ToplamFiyat ₺</td>
+            
+        </tr>
+    }
+</table>

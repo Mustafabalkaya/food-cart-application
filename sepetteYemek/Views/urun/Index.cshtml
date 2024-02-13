@@ -1,0 +1,77 @@
+﻿@using sepetteYemek.Models.siniflar
+@model  List<urunler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<br />
+
+<br />
+
+
+<input type="text" id="search-input" placeholder="Aramak İstediğiniz Ürünü Girin..." class="form-control">
+<br />
+
+<table id="search-table" class="table table-bordered">
+    <tr>
+        <th>Ürün</th>
+        <th>Marka</th>
+        <th>Görsel</th>
+        <th>Stok</th>
+        <th>Alış Fiyat</th>
+        <th>Satış Fiyat</th>
+        <th>Kategori</th>
+        @if (User.IsInRole("P") || User.IsInRole("A"))
+        {
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Sipariş Ver</th>
+        }
+
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>
+                @k.UrunAd
+            </td>
+            <td>@k.Marka</td>
+            <td>
+                <img src="@k.UrunGorsel" style="width:100px;height:70px" />
+            </td>
+            <td>@k.Stok</td>
+            <td>@k.AlisFiyat ₺</td>
+            <td>@k.SatisFiyat ₺</td>
+            <td>@k.Kategori.KategoriAd</td>
+            @if (User.IsInRole("P") || User.IsInRole("A"))
+            {
+
+                <td>@Html.ActionLink("Sil", "UrunSil", new { id = k.Urunid }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten Silmek İstiyor Musunuz?')" })</td>
+                <td><a href="/urun/UrunGetir/@k.Urunid" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/urun/SatisYap/@k.Urunid" class="btn btn-default" style="background-color:lightcoral">Sipariş Ver</a></td>
+            }
+        </tr>
+    }
+</table>
+@if (User.IsInRole("P") || User.IsInRole("A"))
+{
+
+    <a href="/urun/YeniUrun" class="btn btn-info">Yeni Ürün</a>
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#search-input").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#search-table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>
+
+
+

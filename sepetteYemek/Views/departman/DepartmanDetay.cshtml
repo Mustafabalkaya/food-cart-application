@@ -1,0 +1,29 @@
+﻿
+@using sepetteYemek.Models.siniflar
+@model List<personel>
+@{
+    ViewBag.Title = "DepartmanDetay";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+<br />
+
+<h2>Departman Detay Sayfası</h2>
+<br />
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Departman Adı Bilgisi >@ViewBag.s</li>
+</ol>
+
+<table class="table table-hover">
+    <tr>
+        <td>Personel</td>
+        <td>Satışlar</td>
+
+    </tr>
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.PersonelAd @s.PersonelSoyad</td>
+            <td><a href="/departman/DepartmanPersonelSatis/@s.Personelid" class="btn btn-default" style="background-color:darksalmon">Satışlar</a></td>
+        </tr>
+    }
+</table>

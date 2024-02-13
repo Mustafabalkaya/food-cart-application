@@ -1,0 +1,58 @@
+﻿@using sepetteYemek.Models.siniflar
+@model List<personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+<br />
+
+@using (Html.BeginForm("Index", "Personel", FormMethod.Get))
+{
+    <p>
+        Personel Adı : @Html.TextBox("p")
+        <input type="submit" value="ara" />
+    </p>
+
+}
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>Personel Ad</th>
+        <th>Soyad</th>
+        <th>Görsel</th>
+        @if (User.IsInRole("A") || User.IsInRole("P"))
+        {
+            <th>Departman</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Satışlar</th>
+        }
+
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.PersonelAd</td>
+            <td>@k.PersonelSoyad</td>
+            <td>
+                <img src="@k.PersonelGorsel" style="width:100px;height:70px" />
+            </td>
+            @if (User.IsInRole("A") || User.IsInRole("P"))
+            {
+                <td>@k.Departman.DepartmanAd</td>
+                <td>@Html.ActionLink("Sil", "PersonelSil", new { id = k.Personelid }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten Silmek İstiyor Musunuz?')" })</td>
+
+
+                <td><a href="/personel/personelGetir/@k.Personelid" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="/departman/departmanPersonelSatis/@k.Personelid" class="btn btn-success" style="background-color:blueviolet">Detaylar</a></td>
+            }
+
+        </tr>
+    }
+
+</table>
+@if (User.IsInRole("A") || User.IsInRole("P"))
+{
+
+
+    <a href="/personel/personelEkle" class="btn btn-info">Personel Ekle</a>
+}

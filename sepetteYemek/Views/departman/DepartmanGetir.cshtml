@@ -1,0 +1,20 @@
+﻿@model sepetteYemek.Models.siniflar.departman
+@{
+    ViewBag.Title = "DepartmanGetir";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<h2>Departman Güncelleme</h2>
+<br />
+@using (Html.BeginForm("DepartmanGuncelle", "Departman", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(s => s.DepartmanAd)
+        @Html.TextBoxFor(s => s.DepartmanAd, new { @class = "form-control" })
+        @Html.HiddenFor(s => s.Departmanid)
+
+
+    </div>
+    <button class="btn btn-default" style="background-color:cornflowerblue">Güncelle</button>
+}
+

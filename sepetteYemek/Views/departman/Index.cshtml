@@ -1,0 +1,45 @@
+﻿@using sepetteYemek.Models.siniflar
+@model  List<departman>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<table class="table table-bordered" style="margin-top:20px">
+    <tr>
+        <th>Departman Adı</th>
+        @if (User.IsInRole("P") || User.IsInRole("A"))
+        {
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Bilgiler</th>
+        }
+    </tr>
+    @foreach (var k in Model)
+    {
+
+        <tr>
+
+
+            <td>
+                @k.DepartmanAd
+            </td>
+            @if (User.IsInRole("P") || User.IsInRole("A"))
+            {
+                <td>@Html.ActionLink("Sil", "DepartmanSil", new { id = k.Departmanid }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten Silmek İstiyor Musunuz?')" })</td>
+
+                @*<td><a href="/departman/DepartmanSil/@k.Departmanid" class="btn btn-danger">Sil</a></td>*@
+                <td><a href="/departman/DepartmanGetir/@k.Departmanid" class="btn btn-warning">Güncelle</a></td>
+                <td><a href="/departman/DepartmanDetay/@k.Departmanid" class="btn btn-success" style="background-color:blueviolet">Bilgiler</a></td>
+            }
+
+        </tr>
+    }
+
+</table>
+@if (User.IsInRole("P") || User.IsInRole("A"))
+{
+    <a href="/departman/DepartmanEkle" class="btn btn-info">Departman Ekle</a>
+}
+
+

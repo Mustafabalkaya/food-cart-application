@@ -1,0 +1,18 @@
+﻿@model sepetteYemek.Models.siniflar.departman
+@{
+    ViewBag.Title = "DepartmanEkle";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<br />
+<h2>Yeni Departman Sayfası</h2>
+
+<br />
+<form class="form-group" method="post">
+    @Html.LabelFor(s => s.DepartmanAd)
+    @Html.TextBoxFor(s => s.DepartmanAd, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info" id="Btn1">Kaydet</button>
+
+</form>
+

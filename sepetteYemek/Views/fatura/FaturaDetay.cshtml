@@ -1,0 +1,70 @@
+﻿@using sepetteYemek.Models.siniflar
+@model List<faturaKalem>
+@{
+    ViewBag.Title = "FaturaDetay";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<br />
+
+<h2>Fatura Kalemleri Sayfası</h2>
+<br />
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active"></li>
+</ol>
+
+@*<table class="table table-hover">
+    <tr>
+        <td>ID</td>
+        <td>Açıklama</td>
+        <td>Miktar</td>
+        <td>Birim Fiyatı</td>
+        <td>Tutar</td>
+
+    </tr>
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.FaturaKalemid</td>
+            <td>@s.Aciklama</td>
+            <td>@s.Miktar</td>
+            <td>@s.BirimFiyat ₺</td>
+            <td>@s.Tutar ₺</td>
+        </tr>
+    }
+</table>*@
+<div class="container mt-3">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Açıklama</th>
+                <th>Miktar</th>
+                <th>Birim Fiyar</th>
+                <th>Tutar</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+
+                <tr class="table-warning">
+                    <td>@s.FaturaKalemid</td>
+                    <td>@s.Aciklama</td>
+                    <td>@s.Miktar</td>
+                    <td>@s.BirimFiyat ₺</td>
+                    <td>@s.Tutar ₺</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+<a href="/fatura/YeniKalem" class="btn btn-default" style="background-color:darksalmon">Yeni Kalem Girişi</a>
+
+
+
